@@ -86,6 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let decidedColor = squares[i].style.backgroundColor
             const isBlank = squares[i].style.backgroundColor === ''
 
+            const isNotValid = [6,7,14,15,22,23,30,31,38,39,46,47,54,55,62,63]
+            if(isNotValid.includes(i)) continue
+
             if(rowOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 3
                 rowOfThree.forEach(index => {
@@ -98,4 +101,23 @@ document.addEventListener('DOMContentLoaded', () => {
     checkRowForThree()
 
     window.setInterval(() => checkRowForThree(), 100)
+
+    const checkColumnForThree = () => {
+        for (i = 0; i < 48; i++) {
+            let columnOfThree = [i, i+width, i+(width*2)]
+            let decidedColor = squares[i].style.backgroundColor
+            const isBlank = squares[i].style.backgroundColor === ''
+
+            if(columnOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
+                score += 3
+                columnOfThree.forEach(index => {
+                    squares[index].style.backgroundColor = 'black'
+                })
+            }
+        }
+    }
+
+    checkColumnForThree()
+
+    window.setInterval(() => checkColumnForThree(), 100)
 })
