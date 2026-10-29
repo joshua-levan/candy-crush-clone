@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let squareIdBeingDragged
     let squareIdBeingReplaced
 
-   const dragStart = ({ currentTarget }) => {
+    const dragStart = ({ currentTarget }) => {
         colorBeingDragged = currentTarget.style.backgroundColor
         squareIdBeingDragged = parseInt(currentTarget.id)
         console.log(colorBeingDragged)
@@ -51,9 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged
         } else {
             squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged
-        }
-            
-        
+        } 
     }
     const dragOver = e => {
         e.preventDefault()
