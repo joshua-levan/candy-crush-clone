@@ -27,27 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
     creatGrid()
 
     //Drag Candies
-    let colorBeingDragged
-
-    const dragStart = () => {
-        console.log(this.id, 'dragstart')
-    }
-    const dragEnd = () => {
-        colorBeingDragged = this.style.backgroundColor
+   const dragStart = ({ currentTarget }) => {
+        let colorBeingDragged = currentTarget.style.backgroundColor
         console.log(colorBeingDragged)
+        console.log(currentTarget.id, 'dragstart')
+    }
+    const dragEnd = ({ currentTarget }) => {
         console.log(this.id, 'dragend')
     }
-    const dragOver = () => {
-        console.log(this.id, 'dragover')
+    const dragOver = ({ currentTarget }) => {
+        console.log(currentTarget.id, 'dragover')
     }
-    const dragEnter = () => {
-        console.log(this.id, 'dragenter')
+    const dragEnter = ({ currentTarget }) => {
+        console.log(currentTarget.id, 'dragenter')
     }
-    const dragLeave = () => {
-        console.log(this.id, 'dragleave')
+    const dragLeave = ({ currentTarget }) => {
+        console.log(currentTarget.id, 'dragleave')
     }
-    const dragDrop = () => {
-        console.log(this.id, 'dragdrop')
+    const dragDrop = ({ currentTarget }) => {
+        console.log(currentTarget.id, 'dragdrop')
     }
     squares.forEach(square=> square.addEventListener('dragstart', dragStart))
     squares.forEach(square=> square.addEventListener('dragend', dragEnd))
