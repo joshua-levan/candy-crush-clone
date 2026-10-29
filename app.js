@@ -40,6 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const dragEnd = ({ currentTarget }) => {
         console.log(currentTarget.id, 'dragend')
+        //what is a valid move?
+        let validMoves = [squareIdBeingDragged - 1, squareIdBeingDragged + 1, squareIdBeingDragged - width, squareIdBeingDragged + width]
+        let validMove = validMoves.includes(squareIdBeingReplaced)
+
+        if(squareIdBeingReplaced && validMove) {
+            squareIdBeingReplaced = null
+        } else if (squareIdBeingReplaced && !validMove) {
+            squares[squareIdBeingReplaced].style.backgroundColor = colorBeingReplaced
+            squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged
+        } else {
+            squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged
+        }
+            
+        
     }
     const dragOver = e => {
         e.preventDefault()
