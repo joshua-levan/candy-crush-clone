@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: black;
@@ -19,4 +20,15 @@ body {
     height: 70px;
     border-radius: 25%;
     box-shadow: inset 4px 4px 16px 12px rgba(0, 0, 0, 0.3), inset 4px 4px 8px 4px rgba(255, 255, 255, 0.5);
+}
+
+.scoreboard {
+    color: gray;
+    display: flex;
+    align-items: center;
+    font-family: 'Helvetica', sans-serif;
+}
+
+#score-display {
+    margin-left: 10px;
 }

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
+    const scoreDisplay = document.querySelector('#score-display')
     const width = 8
     const squares = []
     let score = 0
@@ -36,11 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dragStart = ({ currentTarget }) => {
         colorBeingDragged = currentTarget.style.backgroundColor
         squareIdBeingDragged = parseInt(currentTarget.id)
-        console.log(colorBeingDragged)
-        console.log(currentTarget.id, 'dragstart')
     }
     const dragEnd = ({ currentTarget }) => {
-        console.log(currentTarget.id, 'dragend')
         //what is a valid move?
         let validMoves = [squareIdBeingDragged - 1, squareIdBeingDragged + 1, squareIdBeingDragged - width, squareIdBeingDragged + width]
         let validMove = validMoves.includes(squareIdBeingReplaced)
@@ -56,17 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const dragOver = e => {
         e.preventDefault()
-        console.log(e.currentTarget.id, 'dragover')
     }
     const dragEnter = ({ currentTarget }) => {
-        console.log(currentTarget.id, 'dragenter')
     }
     const dragLeave = ({ currentTarget }) => {
-        console.log(currentTarget.id, 'dragleave')
     }
     const dragDrop = ({ currentTarget }) => {
         colorBeingReplaced = currentTarget.style.backgroundColor
-        console.log(currentTarget.id, 'dragdrop')
         squareIdBeingReplaced = parseInt(currentTarget.id)
         squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced
         squares[squareIdBeingReplaced].style.backgroundColor = colorBeingDragged
@@ -78,6 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.forEach(square=> square.addEventListener('dragenter', dragEnter))
     squares.forEach(square=> square.addEventListener('dragleave', dragLeave))
     squares.forEach(square=> square.addEventListener('drop', dragDrop))
+
+    //Gravity Logic
+    const moveDown = () => {
+            for(i = 0; i < 56; i++){
+                if(squares[i + width].style.backgroundColor === '') {
+                    squares[i + width].style.backgroundColor = squares[i].style.backgroundColor
+                    squares[i].style.backgroundColor = ''
+                    const firstRow = [0,1,2,3,4,5,6,7]
+                    const isFirstRow = firstRow.includes(i)
+                    if(isFirstRow && squares[i].style.backgroundColor === '') {
+                        let randomColor = Math.floor(Math.random() * candyColors.length)
+                        squares[i].style.backgroundColor = candyColors[randomColor]
+                    }
+                }
+        }
+    }
 
     //Checking for Matches
     //3
@@ -92,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(rowOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 3
+                scoreDisplay.textContent = score
                 rowOfThree.forEach(index => {
                     squares[index].style.backgroundColor = ''
                 })
@@ -109,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(columnOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 3
+                scoreDisplay.textContent = score
                 columnOfThree.forEach(index => {
                     squares[index].style.backgroundColor = ''
                 })
@@ -130,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(rowOfFour.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 4
+                scoreDisplay.textContent = score
                 rowOfFour.forEach(index => {
                     squares[index].style.backgroundColor = ''
                 })
@@ -147,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(columnOfFour.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 4
+                scoreDisplay.textContent = score
                 columnOfFour.forEach(index => {
                     squares[index].style.backgroundColor = ''
                 })
@@ -155,10 +169,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     checkColumnForFour()
+
+    const removeHighlight = () => {
+        squares.forEach(square => {
+            if(!square.style.backgroundColor){
+                square.style.boxShadow = 'none'
+            } else {
+                square.style.boxShadow = 'inset 4px 4px 16px 12px rgba(0, 0, 0, 0.3), inset 4px 4px 8px 4px rgba(255, 255, 255, 0.5)'
+            }
+        })
+    }
+
     window.setInterval(() => {
+        moveDown()
         checkRowForFour()
         checkColumnForFour()
         checkColumnForThree()
         checkRowForThree()
+        removeHighlight()
     }, 100)
 })
