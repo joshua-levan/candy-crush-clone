@@ -1,11 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 100vh;
+}
+
 .grid {
     width: 560px;
     height: 560px;
     display: flex;
     flex-wrap: wrap;
+    background-color: black;
 }
 
 .grid div {
     width: 70px;
     height: 70px;
+    border-radius: 25%;
+    box-shadow: inset 4px 4px 16px 12px rgba(0, 0, 0, 0.3), inset 4px 4px 8px 4px rgba(255, 255, 255, 0.5);
 }
