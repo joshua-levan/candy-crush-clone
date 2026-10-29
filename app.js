@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Checking for Matches
     //3
     const checkRowForThree = () => {
-        for (i = 0; i < 62; i++) {
+        for (i = 0; i < 64; i++) {
             let rowOfThree = [i, i+1, i+2]
             let decidedColor = squares[i].style.backgroundColor
             const isBlank = squares[i].style.backgroundColor === ''
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(rowOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 3
                 rowOfThree.forEach(index => {
-                    squares[index].style.backgroundColor = 'black'
+                    squares[index].style.backgroundColor = ''
                 })
             }
         }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(columnOfThree.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 3
                 columnOfThree.forEach(index => {
-                    squares[index].style.backgroundColor = 'black'
+                    squares[index].style.backgroundColor = ''
                 })
             }
         }
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //4
     const checkRowForFour = () => {
-        for (i = 0; i < 61; i++) {
+        for (i = 0; i < 64; i++) {
             let rowOfFour = [i, i+1, i+2, i+3]
             let decidedColor = squares[i].style.backgroundColor
             const isBlank = squares[i].style.backgroundColor === ''
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(rowOfFour.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 4
                 rowOfFour.forEach(index => {
-                    squares[index].style.backgroundColor = 'black'
+                    squares[index].style.backgroundColor = ''
                 })
             }
         }
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkRowForFour()
 
     const checkColumnForFour = () => {
-        for (i = 0; i < 48; i++) {
+        for (i = 0; i < 40; i++) {
             let columnOfFour = [i, i+width, i+(width*2), i+(width*3)]
             let decidedColor = squares[i].style.backgroundColor
             const isBlank = squares[i].style.backgroundColor === ''
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(columnOfFour.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
                 score += 4
                 columnOfFour.forEach(index => {
-                    squares[index].style.backgroundColor = 'black'
+                    squares[index].style.backgroundColor = ''
                 })
             }
         }
