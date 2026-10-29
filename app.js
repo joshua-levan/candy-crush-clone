@@ -41,8 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const dragEnd = ({ currentTarget }) => {
         console.log(currentTarget.id, 'dragend')
     }
-    const dragOver = ({ currentTarget }) => {
-        console.log(currentTarget.id, 'dragover')
+    const dragOver = e => {
+        e.preventDefault()
+        console.log(e.currentTarget.id, 'dragover')
     }
     const dragEnter = ({ currentTarget }) => {
         console.log(currentTarget.id, 'dragenter')
@@ -55,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(currentTarget.id, 'dragdrop')
         squareIdBeingReplaced = parseInt(currentTarget.id)
         squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced
+        squares[squareIdBeingReplaced].style.backgroundColor = colorBeingDragged
+
     }
     squares.forEach(square=> square.addEventListener('dragstart', dragStart))
     squares.forEach(square=> square.addEventListener('dragend', dragEnd))
