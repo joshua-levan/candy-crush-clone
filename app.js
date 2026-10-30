@@ -75,17 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Gravity Logic
     const moveDown = () => {
-            for(i = 0; i < 56; i++){
-                if(squares[i + width].style.backgroundColor === '') {
-                    squares[i + width].style.backgroundColor = squares[i].style.backgroundColor
-                    squares[i].style.backgroundColor = ''
-                    const firstRow = [0,1,2,3,4,5,6,7]
-                    const isFirstRow = firstRow.includes(i)
-                    if(isFirstRow && squares[i].style.backgroundColor === '') {
-                        let randomColor = Math.floor(Math.random() * candyColors.length)
-                        squares[i].style.backgroundColor = candyColors[randomColor]
-                    }
-                }
+
+        // Move candies down into empty spaces
+        for (let i = 0; i < 56; i++) {
+            if (squares[i + width].style.backgroundColor === '') {
+                squares[i + width].style.backgroundColor = squares[i].style.backgroundColor
+                squares[i].style.backgroundColor = ''
+            }
+        }
+
+        // Refill empty spaces in the first row
+        for (let i = 0; i < width; i++) {
+            if (squares[i].style.backgroundColor === '') {
+                let randomColor = Math.floor(Math.random() * candyColors.length)
+                squares[i].style.backgroundColor = candyColors[randomColor]
+            }
         }
     }
 
