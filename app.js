@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(isNotValid.includes(i)) continue
 
             if(rowOfFour.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
-                score += 4
+                score += 5
                 scoreDisplay.textContent = score
                 rowOfFour.forEach(index => {
                     squares[index].style.backgroundColor = ''
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isBlank = squares[i].style.backgroundColor === ''
 
             if(columnOfFour.every(index => squares[index].style.backgroundColor === decidedColor && !isBlank)) {
-                score += 4
+                score += 5
                 scoreDisplay.textContent = score
                 columnOfFour.forEach(index => {
                     squares[index].style.backgroundColor = ''
